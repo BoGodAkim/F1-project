@@ -35,15 +35,21 @@ public:
     Date(int day, int month, int year);
     Date(std::string date);
     Date(const Date &date);
-    Date &operator=(const Date &date);
+    // Date &operator=(const Date &date);
     void display();
 };
 
 class Time
 {
+private:
     int hour;
     int minute;
     int second;
+
+public:
+    Time() = default;
+    Time(std::string time);
+    void display();
 };
 
 class Result
@@ -108,52 +114,65 @@ class DriverRaceData // NOTE: Maybe stor this data in class result не надо
 
 class Race
 {
+private:
     Circuit *circuit;
-    int round; // NOTE: Need?
     std::string name;
-    Date gp_date;
-    Time gp_time; // NOTE:
+    Date grand_prix_date;
+    Time *grand_prix_time;
     std::string url;
-    Date practice1_date; // NOTE: MAY BE Pointer to Time and Date
-    Date practice2_date;
-    Date practice3_date;
-    Time practice1_time;
-    Time practice2_time;
-    Time practice3_time;
-    Date qualifying_date;
-    Time qualifying_time;
-    Date sprint_date;
-    Time sprint_time;
+    Date *practice1_date;
+    Date *practice2_date;
+    Date *practice3_date;
+    Time *practice1_time;
+    Time *practice2_time;
+    Time *practice3_time;
+    Date *qualifying_date;
+    Time *qualifying_time;
+    Date *sprint_date;
+    Time *sprint_time;
     std::vector<DriverRaceData> data;
     Leaderboard driversLeaderboard;
     Leaderboard constructorsLeaderboard;
     Leaderboard seasonDriversLeaderboard;
     Leaderboard seasonConstructorsLeaderboard;
     // NOTE: MAYBE Start grid
+public:
+    Race() = default;
+    Race(std::istringstream &iss, Circuit *circuit);
+    void addQualifying(std::istringstream &iss, Driver *driver, Constructor *constructor);
+    void display();
 };
 
 class Season
 {
+private:
     std::vector<Race> races;
     Leaderboard driversLeaderboard;
     Leaderboard constructorsLeaderboard;
     std::string url;
+
+public:
+    Season() = default;
+    Season(std::istringstream &iss);
+    void addRace(std::istringstream &iss, int round, Circuit *circuit);
+    void addQualifying(std::istringstream &iss, int round, Driver *driver, Constructor *constructor);
+    void display();
 };
 
 class Constructor
 {
 private:
     std::string identifier;
+    std::string name;
     std::string nationality;
     std::string url;
-    std::string name;
     // NOTE: Add informations about wins
 public:
     Constructor() = default;
     Constructor(std::string identifier, std::string name, std::string nationality, std::string url);
     Constructor(std::string line);
-    Constructor(std::istringstream& iis);
-    Constructor &operator=(const Constructor &constructor);
+    Constructor(std::istringstream &iis);
+    // Constructor &operator=(const Constructor &constructor);
     void display();
 };
 
@@ -174,7 +193,7 @@ public:
     Circuit(std::string identifier, std::string name, std::string location, std::string country, float latitude, float longitude, int altitude, std::string url);
     Circuit(std::string line);
     Circuit(std::istringstream &iis);
-    Circuit &operator=(const Circuit &circuit);
+    // Circuit &operator=(const Circuit &circuit);
     void display();
 };
 
@@ -195,7 +214,7 @@ public:
     Driver(std::string indefier, int number, std::string code, std::string forname, std::string surname, Date dateOfBirth, std::string nationality, std::string url);
     Driver(std::string line);
     Driver(std::istringstream &iss);
-    Driver &operator=(const Driver &driver);
+    // Driver &operator=(const Driver &driver);
     void display();
 };
 
