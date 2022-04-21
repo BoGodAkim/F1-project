@@ -169,26 +169,26 @@ Formula::Formula()
     }
     racesData.close();
 
-    std::ifstream qualifyingData("data/qualifying.csv");
-    getline(qualifyingData, line);
-    while (getline(qualifyingData, line))
-    {
-        line.erase(remove(line.begin(), line.end(), '"'), line.end());
-        istringstream iss(line);
-        int raceID;
-        int driverID;
-        int constructorID;
-        string raceID_string;
-        string driverID_string;
-        string constructorID_string;
-        getline(iss, raceID_string, ',');
-        raceID = stoi(raceID_string);
-        getline(iss, driverID_string, ',');
-        driverID = stoi(driverID_string);
-        getline(iss, constructorID_string, ',');
-        constructorID = stoi(constructorID_string);
-        this->seasons[raceID_to_year_and_round[raceID] / 100 - 1950].addQualifying(iss, raceID_to_year_and_round[raceID] % 10, &drivers[driverID], &constructors[constructorID]);
-    }
+    // std::ifstream qualifyingData("data/qualifying.csv");
+    // getline(qualifyingData, line);
+    // while (getline(qualifyingData, line))
+    // {
+    //     line.erase(remove(line.begin(), line.end(), '"'), line.end());
+    //     istringstream iss(line);
+    //     int raceID;
+    //     int driverID;
+    //     int constructorID;
+    //     string raceID_string;
+    //     string driverID_string;
+    //     string constructorID_string;
+    //     getline(iss, raceID_string, ',');
+    //     raceID = stoi(raceID_string);
+    //     getline(iss, driverID_string, ',');
+    //     driverID = stoi(driverID_string);
+    //     getline(iss, constructorID_string, ',');
+    //     constructorID = stoi(constructorID_string);
+    //     this->seasons[raceID_to_year_and_round[raceID] / 100 - 1950].addQualifying(iss, raceID_to_year_and_round[raceID] % 10, &drivers[driverID], &constructors[constructorID]);
+    // }
 }
 
 void Formula::display()
