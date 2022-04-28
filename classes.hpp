@@ -73,7 +73,7 @@ class Result
 class Qualifying
 {
     int position;
-    std::string *time_q1; // NOTE: MAY BE Pointer to Time
+    std::string *time_q1; 
     std::string *time_q2;
     std::string *time_q3;
 };
@@ -101,7 +101,7 @@ class Lap
     Time time;
 };
 
-class DriverRaceData // NOTE: Maybe stor this data in class result не надо(Федя)
+class DriverRaceData
 {
     Driver *driver;
     Constructor *constructor;
